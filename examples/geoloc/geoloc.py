@@ -81,6 +81,7 @@ def main():
             try:
                 m = p(identifier, payload, gi)
             except Exception, e:
+                import traceback
                 print "invalid message %s" % payload
                 import traceback
                 traceback.print_exc(file=sys.stdout)
