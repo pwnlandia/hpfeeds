@@ -283,6 +283,7 @@ class FeedBroker(object):
 				c2.publish(ident, chan+'..broker', data)
 
 def main():
+	global MONGOIP, MONGOPORT
 	cfg = json.load(file(os.path.join(os.path.dirname(__file__), "conf.json")))
 	MONGOIP = cfg["MONGO_HOST"]
 	MONGOPORT = cfg["MONGO_PORT"]
