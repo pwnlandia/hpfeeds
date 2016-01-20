@@ -2,6 +2,8 @@
 
 import pymongo
 import sys
+import json
+import os
 
 def handle_list(arg):
     if arg:
@@ -25,7 +27,9 @@ rec = {
     "subscribe":subscribe
 }
 
-client = pymongo.MongoClient()
+cfg = json.load(file(os.path.join(os.path.dirname(__file__), "conf.json")))
+
+client = pymongo.MongoClient(host=cfg["MONGO_HOST"], port=cfg["MONGO_PORT"])
 res = client.hpfeeds.auth_key.update({"identifier": ident}, {"$set": rec}, upsert=True)
 client.fsync()
 client.close()

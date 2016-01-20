@@ -6,6 +6,8 @@ import struct
 import hashlib
 import collections
 import random
+import json
+import os
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -281,6 +283,10 @@ class FeedBroker(object):
 				c2.publish(ident, chan+'..broker', data)
 
 def main():
+	cfg = json.load(file(os.path.join(os.path.dirname(__file__), "conf.json")))
+	MONGOIP = cfg["MONGO_HOST"]
+	MONGOPORT = cfg["MONGO_PORT"]
+
 	fb = FeedBroker()
 
 	loop()
