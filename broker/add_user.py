@@ -30,7 +30,12 @@ rec = {
 cfg = json.load(file(os.path.join(os.path.dirname(__file__), "conf.json")))
 
 client = pymongo.MongoClient(host=cfg["MONGO_HOST"], port=cfg["MONGO_PORT"])
-res = client.hpfeeds.auth_key.update({"identifier": ident}, {"$set": rec}, upsert=True)
+if cfg["MONGO_AUTH"]:
+    db = client.hpfeeds.authenticate(cfg["MONGO_USER"], cfg["MONGO_PASSWORD"], mechanism=cfg["MONGO_AUTH_MECHANISM"])
+    res = db.auth_key.update({"identifier": ident}, {"$set": rec}, upsert=True)
+else:
+    res = client.hpfeeds.auth_key.update({"identifier": ident}, {"$set": rec}, upsert=True)
+
 client.fsync()
 client.close()
 

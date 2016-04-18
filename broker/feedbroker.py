@@ -20,6 +20,10 @@ FBPORT = 10000
 FBNAME = '@hp2'
 MONGOIP = '127.0.0.1'
 MONGOPORT = 27017
+MONGOAUTH = False
+MONGOUSER = None
+MONGOPASSWORD = None
+MONGOAUTHMECHANISM = None
 
 OP_ERROR	= 0
 OP_INFO		= 1
@@ -283,10 +287,14 @@ class FeedBroker(object):
 				c2.publish(ident, chan+'..broker', data)
 
 def main():
-	global MONGOIP, MONGOPORT
+	global MONGOIP, MONGOPORT, MONGOAUTH, MONGOUSER, MONGOPASSWORD, MONGOAUTHMECHANISM
 	cfg = json.load(file(os.path.join(os.path.dirname(__file__), "conf.json")))
 	MONGOIP = cfg["MONGO_HOST"]
 	MONGOPORT = cfg["MONGO_PORT"]
+	MONGOAUTH = cfg["MONGO_AUTH"]
+	MONGOUSER = cfg["MONGO_USER"]
+	MONGOPASSWORD = cfg["MONGO_PASSWORD"]
+	MONGOAUTHMECHANISM = cfg["MONGO_AUTH_MECHANISM"]
 
 	fb = FeedBroker()
 
