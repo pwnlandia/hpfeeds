@@ -230,6 +230,7 @@ class FeedBroker(object):
 
 	def initdb(self):
 		self.db = MongoConn(MONGOIP, MONGOPORT)
+		self.db.auth("hpfeeds", MONGOUSER, MONGOPASSWORD)
 		self.db._on('ready', self._dbready)
 		self.db._on('close', self._dbclose)
 
