@@ -33,7 +33,7 @@ client = pymongo.MongoClient(host=cfg["MONGO_HOST"], port=cfg["MONGO_PORT"])
 if cfg["MONGO_AUTH"]:
     client.hpfeeds.authenticate(cfg["MONGO_USER"], cfg["MONGO_PASSWORD"], mechanism=cfg["MONGO_AUTH_MECHANISM"])
 res = client.hpfeeds.auth_key.update({"identifier": ident}, {"$set": rec}, upsert=True)
-client.fsync()
+#client.fsync()
 client.close()
 
 if res['updatedExisting']:
