@@ -135,6 +135,17 @@ def wordpot_event(identifier, payload, gi):
 
     return create_message('wordpot.alerts', identifier, gi, src_ip=dec.source_ip, dst_ip=dec.dest_ip)
 
+def beeswax_events(identifier, payload, gi):
+    try:
+        dec = ezdict(json.loads(str(payload)))
+    except:
+        print 'exception processing beeswax events'
+        traceback.print_exc()
+        return
+
+    return create_message('beeswax.events', identifier, gi, src_ip=dec.source_ip, dst_ip=dec.dest_ip)
+
+
 # TODO: use this function everywhere else is can be to clean up this code.
 def create_message(event_type, identifier, gi, src_ip, dst_ip):
     geoloc = None

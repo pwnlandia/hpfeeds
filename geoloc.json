@@ -2,21 +2,23 @@
     "HOST": "localhost",
     "PORT": 10000,
     "IDENT": "geoloc", 
-    "SECRET": "",
+    "SECRET": "379bdb6af644413ab6807479d06d96bf",
     "CHANNELS": [
-        "amun.events",
         "dionaea.connections",
         "dionaea.capture",
         "glastopf.events",
         "beeswarm.hive",
         "kippo.sessions",
-	"cowrie.sessions",
+        "cowrie.sessions",
         "conpot.events",
         "snort.alerts",
+        "amun.events",
         "wordpot.events",
         "shockpot.events",
         "p0f.events",
-        "elastichoney.events"
+        "suricata.events",
+        "elastichoney.events",
+        "beeswax.events"
     ],
     "GEOLOC_CHAN": "geoloc.events"
 }
