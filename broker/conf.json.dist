@@ -1,8 +1,0 @@
-{
-  "MONGO_HOST": "localhost",
-  "MONGO_PORT": 27017,
-  "MONGO_AUTH": false,
-  "MONGO_USER": null,
-  "MONGO_PASSWORD": null,
-  "MONGO_AUTH_MECHANISM": null
-}

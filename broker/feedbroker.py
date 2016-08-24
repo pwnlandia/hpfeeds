@@ -289,13 +289,12 @@ class FeedBroker(object):
 
 def main():
 	global MONGOIP, MONGOPORT, MONGOAUTH, MONGOUSER, MONGOPASSWORD, MONGOAUTHMECHANISM
-	cfg = json.load(file(os.path.join(os.path.dirname(__file__), "conf.json")))
-	MONGOIP = cfg["MONGO_HOST"]
-	MONGOPORT = cfg["MONGO_PORT"]
-	MONGOAUTH = cfg["MONGO_AUTH"]
-	MONGOUSER = cfg["MONGO_USER"]
-	MONGOPASSWORD = cfg["MONGO_PASSWORD"]
-	MONGOAUTHMECHANISM = cfg["MONGO_AUTH_MECHANISM"]
+	MONGOIP = os.getenv("MONGO_HOST")
+	MONGOPORT = os.getenv("MONGO_PORT")
+	MONGOAUTH = os.getenv("MONGO_AUTH")
+	MONGOUSER = os.getenv("MONGO_USER")
+	MONGOPASSWORD = os.getenv("MONGO_PASSWORD")
+	MONGOAUTHMECHANISM = os.getenv("MONGO_AUTH_MECHANISM")
 
 	fb = FeedBroker()
 
