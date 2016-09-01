@@ -290,7 +290,7 @@ class FeedBroker(object):
 def main():
 	global MONGOIP, MONGOPORT, MONGOAUTH, MONGOUSER, MONGOPASSWORD, MONGOAUTHMECHANISM
 	MONGOIP = os.getenv("MONGO_HOST")
-	MONGOPORT = os.getenv("MONGO_PORT")
+	MONGOPORT = int(os.getenv("MONGO_PORT"))
 	if os.getenv("MONGO_AUTH") == "true":
 		MONGOAUTH = True
 	else:

@@ -27,7 +27,7 @@ rec = {
     "subscribe":subscribe
 }
 
-client = pymongo.MongoClient(host=os.getenv("MONGO_HOST"), port=os.getenv("MONGO_PORT"))
+client = pymongo.MongoClient(host=os.getenv("MONGO_HOST"), port=int(os.getenv("MONGO_PORT")))
 if os.getenv("MONGO_AUTH") == "true":
     client.hpfeeds.authenticate(os.getenv("MONGO_USER"), os.getenv("MONGO_PASSWORD"), mechanism=os.getenv("MONGO_AUTH_MECHANISM"))
 res = client.hpfeeds.auth_key.update({"identifier": ident}, {"$set": rec}, upsert=True)
