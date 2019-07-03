@@ -6,6 +6,8 @@ import struct
 import hashlib
 import collections
 import random
+import json
+import os
 
 import logging
 logging.basicConfig(level=logging.INFO)
@@ -18,6 +20,10 @@ FBPORT = 10000
 FBNAME = '@hp2'
 MONGOIP = '127.0.0.1'
 MONGOPORT = 27017
+MONGOAUTH = False
+MONGOUSER = None
+MONGOPASSWORD = None
+MONGOAUTHMECHANISM = None
 
 OP_ERROR	= 0
 OP_INFO		= 1
@@ -224,6 +230,7 @@ class FeedBroker(object):
 
 	def initdb(self):
 		self.db = MongoConn(MONGOIP, MONGOPORT)
+		self.db.auth("hpfeeds", MONGOUSER, MONGOPASSWORD)
 		self.db._on('ready', self._dbready)
 		self.db._on('close', self._dbclose)
 
@@ -281,6 +288,17 @@ class FeedBroker(object):
 				c2.publish(ident, chan+'..broker', data)
 
 def main():
+	global MONGOIP, MONGOPORT, MONGOAUTH, MONGOUSER, MONGOPASSWORD, MONGOAUTHMECHANISM
+	MONGOIP = os.getenv("MONGO_HOST")
+	MONGOPORT = int(os.getenv("MONGO_PORT"))
+	if os.getenv("MONGO_AUTH") == "true":
+		MONGOAUTH = True
+	else:
+		MONGOAUTH = False
+	MONGOUSER = os.getenv("MONGO_USER")
+	MONGOPASSWORD = os.getenv("MONGO_PASSWORD")
+	MONGOAUTHMECHANISM = os.getenv("MONGO_AUTH_MECHANISM")
+
 	fb = FeedBroker()
 
 	loop()
